@@ -13,6 +13,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import { ConvertSecondToFotmatedString } from '../lib/convert';
 
 const time = ref("25:00")
 const isRunning = ref(false)
@@ -28,7 +29,7 @@ function start() {
     timePasted = 0
     interval = setInterval(() => {
         timePasted++
-        time.value = `${secondsIn25Min - timePasted}`
+        time.value = ConvertSecondToFotmatedString(secondsIn25Min - timePasted)
     }, msInSecond)
 }
 
