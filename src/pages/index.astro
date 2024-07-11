@@ -2,14 +2,24 @@
 import Margin from "../components/Margin.astro";
 import Master from "../components/Master.astro";
 import Padding from "../components/Padding.astro";
+import Timer from "../components/Timer.vue";
 ---
 
 <Master>
 	<Margin>
 		<Padding>
 			<h1 class="flex justify-center text-2xl md:text-3xl">Timer</h1>
-			<p class="flex justify-center">This is a simple open-source Pomodoro timer</p>
-			<p class="flex justify-center text-sm">This software is under the MIT license</p>
+			<p class="flex justify-center">
+				This is a simple open-source Pomodoro timer
+			</p>
+			<p class="flex justify-center text-sm">
+				This software is under the MIT license
+			</p>
+			<Margin>
+				<div class="flex justify-center">
+					<Timer />
+				</div>
+			</Margin>
 		</Padding>
 	</Margin>
 </Master>
