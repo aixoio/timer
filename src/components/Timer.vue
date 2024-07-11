@@ -4,7 +4,7 @@
         <div class="w-full min-w-full mt-4 grid md:grid-cols-4 grid-cols-1 md:gap-2">
             <button class="btn btn-primary w-full min-w-full col-span-3">
                 <span v-if="!isRunning">Start</span>
-                <span v-if="isRunning">Stop</span>
+                <span v-else>Stop</span>
             </button>
             <button class="btn btn-neutral col-span-1 w-full min-w-full mt-2 md:mt-0">Reset</button>
         </div>
