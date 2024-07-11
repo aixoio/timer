@@ -1,8 +1,13 @@
 ---
+import Margin from "../components/Margin.astro";
 import Master from "../components/Master.astro";
-
+import Padding from "../components/Padding.astro";
 ---
 
 <Master>
-	<h1>Hello world</h1>
+	<Margin>
+		<Padding>
+			<h1>Hello world</h1>
+		</Padding>
+	</Margin>
 </Master>
