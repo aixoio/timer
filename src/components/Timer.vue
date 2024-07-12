@@ -1,11 +1,17 @@
 <template>
     <div class="border border-base-300 p-4 rounded-lg shadow-sm">
         <audio src="/sounds/alert.mp3" ref="alertSound" class="hidden"></audio>
-        <div class="flex justify-center form-control mb-4">
+        <div class="flex justify-center form-control">
             <label class="label cursor-pointer">
                 <span class="label-text">Play sound</span>
                 <input type="checkbox" class="checkbox checkbox-primary" v-model="playSound">
             </label>
+        </div>
+        <div class="flex justify-center form-control mb-4">
+          <label class="label cursor-pointer">
+            <span class="label-text">Auto start</span>
+            <input type="checkbox" class="checkbox checkbox-primary" v-model="autoStart">
+          </label>
         </div>
         <div class="flex justify-center form-control mb-4">
             <select name="state" id="state" class="select select-bordered" v-model="state" @change="reset">
@@ -33,6 +39,7 @@ const time = ref("25:0")
 const isRunning = ref(false)
 const playSound = ref(true)
 const alertSound = ref<HTMLAudioElement|null>(null)
+const autoStart = ref(false)
 
 const secondsIn25Min = 25 * 60
 const secondsIn5Min = 5 * 60
@@ -86,6 +93,9 @@ function start() {
                 timesWorked = 0
             }
             reset()
+            if (autoStart.value) {
+                start()
+            }
         }
     }, msInSecond)
 }
