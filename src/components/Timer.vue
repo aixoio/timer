@@ -29,7 +29,7 @@
 import { ref } from 'vue';
 import { ConvertSecondToFotmatedString } from '../lib/convert';
 
-const time = ref("25:00")
+const time = ref("25:0")
 const isRunning = ref(false)
 const playSound = ref(true)
 const alertSound = ref<HTMLAudioElement|null>(null)
