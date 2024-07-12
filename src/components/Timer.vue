@@ -1,7 +1,6 @@
 <template>
     <div class="border border-base-300 p-4 rounded-lg shadow-sm">
         <div class="flex justify-center form-control mb-4">
-            <label for="state" class="sr-only">Section</label>
             <select name="state" id="state" class="select select-bordered" v-model="state" @change="reset">
                 <option selected value="working">Working</option>
                 <option value="break">Break</option>
