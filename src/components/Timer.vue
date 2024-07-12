@@ -1,5 +1,13 @@
 <template>
     <div class="border border-base-300 p-4 rounded-lg shadow-sm">
+        <div class="flex justify-center form-control mb-4">
+            <label for="state" class="sr-only">Section</label>
+            <select name="state" id="state" class="select select-bordered" v-model="state" @change="reset">
+                <option selected value="working">Working</option>
+                <option value="break">Break</option>
+                <option value="long-break">Long Break</option>
+            </select>
+        </div>
         <h1 class="text-5xl font-bold flex justify-center">{{ time }}</h1>
         <div class="w-full min-w-full mt-4 grid md:grid-cols-4 grid-cols-1 md:gap-2">
             <button class="btn btn-primary w-full min-w-full col-span-3" @click="toggle">
@@ -26,13 +34,13 @@ const msInSecond = 1000
 let interval: null|number = null
 let timePasted = 0
 let timesWorked = 0
-let state: "woking"|"break"|"long-break" = "woking"
+let state: "working"|"break"|"long-break" = "working"
 let currentTime = 0
 let wasStopped = false
 
 function switchState() {
     switch (state) {
-        case "woking":
+        case "working":
             currentTime = secondsIn25Min
             break
         case "break":
@@ -57,8 +65,8 @@ function start() {
         if (timePasted === currentTime) {
             console.log(state);
             if (state === "break" || state === "long-break") {
-                state = "woking"
-            } else if (state === "woking") {
+                state = "working"
+            } else if (state === "working") {
                 state = "break"
                 timesWorked++
             }
