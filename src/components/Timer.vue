@@ -63,7 +63,6 @@ function start() {
         timePasted++
         time.value = ConvertSecondToFotmatedString(currentTime - timePasted)
         if (timePasted === currentTime) {
-            console.log(state);
             if (state === "break" || state === "long-break") {
                 state = "working"
             } else if (state === "working") {
