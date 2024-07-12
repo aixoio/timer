@@ -10,14 +10,14 @@ import Timer from "../components/Timer.vue";
 		<Padding>
 			<h1 class="flex justify-center text-2xl md:text-3xl">Timer</h1>
 			<p class="flex justify-center">
-				This is a simple open-source Pomodoro timer
+				<span>This is a simple <a href="https://github.com/aixoio/timer" target="_blank" class="underline">open-source</a> Pomodoro timer</span>
 			</p>
 			<p class="flex justify-center text-sm">
 				This software is under the MIT license
 			</p>
 			<Margin>
 				<div class="flex justify-center">
-					<Timer client:load></Timer>
+					<Timer client:load />
 				</div>
 			</Margin>
 		</Padding>
