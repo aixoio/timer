@@ -6,7 +6,7 @@
                 <span v-if="!isRunning">Start</span>
                 <span v-else>Stop</span>
             </button>
-            <button class="btn btn-neutral col-span-1 w-full min-w-full mt-2 md:mt-0">Reset</button>
+            <button class="btn btn-neutral col-span-1 w-full min-w-full mt-2 md:mt-0" @click="reset">Reset</button>
         </div>
     </div>
 </template>
@@ -19,24 +19,62 @@ const time = ref("25:00")
 const isRunning = ref(false)
 
 const secondsIn25Min = 25 * 60
+const secondsIn5Min = 5 * 60
+const secondsIn15Min = 15 * 60
 const msInSecond = 1000
 
 let interval: null|number = null
 let timePasted = 0
+let timesWorked = 0
+let state: "woking"|"break"|"long-break" = "woking"
+let currentTime = 0
+let wasStopped = false
+
+function switchState() {
+    switch (state) {
+        case "woking":
+            currentTime = secondsIn25Min
+            break
+        case "break":
+            currentTime = secondsIn5Min
+            break
+        case "long-break":
+            currentTime = secondsIn15Min
+            break
+    }
+}
 
 function start() {
     isRunning.value = true
-    timePasted = 0
+    if (!wasStopped) {
+        timePasted = 0
+        switchState()
+        wasStopped = false
+    }
     interval = setInterval(() => {
         timePasted++
-        time.value = ConvertSecondToFotmatedString(secondsIn25Min - timePasted)
+        time.value = ConvertSecondToFotmatedString(currentTime - timePasted)
+        if (timePasted === currentTime) {
+            console.log(state);
+            if (state === "break" || state === "long-break") {
+                state = "woking"
+            } else if (state === "woking") {
+                state = "break"
+                timesWorked++
+            }
+            if (timesWorked === 4) {
+                state = "long-break"
+                timesWorked = 0
+            }
+            reset()
+        }
     }, msInSecond)
 }
 
 function stop() {
     isRunning.value = false
     clearInterval(interval as number)
-
+    wasStopped = true
 }
 
 function toggle() {
@@ -49,7 +87,12 @@ function toggle() {
 }
 
 function reset() {
-
+    isRunning.value = false
+    clearInterval(interval as number)
+    timePasted = 0
+    switchState()
+    time.value = ConvertSecondToFotmatedString(currentTime - timePasted)
+    wasStopped = false
 }
 
 </script>
